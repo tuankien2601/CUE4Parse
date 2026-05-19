@@ -35,7 +35,11 @@ jobs:
         with:
           name: nuget-packages
           path: ./nuget-packages
+      
+      - name: Add nuget source
+        working-directory: ./nuget-packages
+        run: dotnet nuget add source --name "GitHub" --username "tuankien2601" --password ${{ secrets.PASSWORD }} --store-password-in-clear-text "https://nuget.pkg.github.com/tuankien2601/index.json"
 
       - name: Push NuGet Package(s)
         working-directory: ./nuget-packages
-        run: dotnet nuget push "*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+        run: dotnet nuget push "*.nupkg" --source GitHub --skip-duplicate
