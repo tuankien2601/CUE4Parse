@@ -42,4 +42,4 @@ jobs:
 
       - name: Push NuGet Package(s)
         working-directory: ./nuget-packages
-        run: dotnet nuget push "*.nupkg" --source GitHub --skip-duplicate
+        run: dotnet nuget push "*.nupkg" --source GitHub --skip-duplicate --api-key ${{ secrets.PASSWORD }}
